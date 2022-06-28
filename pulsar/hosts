@@ -1,4 +1,2 @@
-[galaxyservers]
-galaxy.dev.cac.cornell.edu ansible_connection=ssh ansible_user=egcuser
 [pulsarservers]
-149.165.155.213 ansible_user=exouser
+149.165.155.213 ansible_user=egcuser

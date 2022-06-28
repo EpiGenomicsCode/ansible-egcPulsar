@@ -2,13 +2,7 @@
   pre_tasks:
     - name: Install some packages
       package:
-        name:
-          - build-essential
-          - git
-          - python3-dev
-          - libcurl4-openssl-dev
-          - libssl-dev
-          - virtualenv
+        name: ['gcc-toolset-11-toolchain', 'git', 'python3', 'curl', 'libcurl-devel', 'openssl-devel', 'virtualenv']
         state: present
         update_cache: yes
       become: yes
