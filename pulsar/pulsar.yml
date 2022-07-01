@@ -1,11 +1,28 @@
 - hosts: pulsarservers
+  become: true
+  become_user: root
   pre_tasks:
-    - name: Install some packages
-      package:
-        name: ['gcc-toolset-11-toolchain', 'git', 'python3', 'curl', 'libcurl-devel', 'openssl-devel', 'virtualenv']
-        state: present
-        update_cache: yes
+    - name: Install Pulsar dependencies
       become: yes
+      ansible.builtin.dnf:
+        state: latest
+        name:
+          - git
+          - python36
+          - python38
+          - python3-devel
+          - python3-virtualenv
+          - gcc
+          - curl
+          - libcurl-devel
+          - openssl-devel
+    - name: Set default version of Python
+      ansible.builtin.alternatives:
+        name: python
+        path: /usr/bin/python3
+    - name: Disable SELinux.
+      ansible.posix.selinux:
+        state: disabled
   roles:
     - role: galaxyproject.cvmfs
       become: yes
