@@ -1,8 +1,6 @@
 - src: galaxyproject.cvmfs
   version: 0.2.13
 - src: galaxyproject.pulsar
-  version: 1.0.10
-- src: galaxyproject.repos
-  version: 0.0.2
+  version: 1.0.9
 - src: galaxyproject.slurm
   version: 0.1.3

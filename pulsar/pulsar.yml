@@ -1,7 +1,13 @@
 - hosts: pulsarservers
   become: true
   become_user: root
+  vars_files:
+    - group_vars/secret.yml
   pre_tasks:
+    - name: system update
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
     - name: Install Pulsar dependencies
       become: yes
       ansible.builtin.dnf:
@@ -24,6 +30,11 @@
       ansible.posix.selinux:
         state: disabled
   roles:
-    - role: galaxyproject.cvmfs
-      become: yes
+    - galaxyproject.cvmfs
     - galaxyproject.pulsar
+  post_tasks:
+    - name: Disable firewalld service
+      ansible.builtin.systemd:
+        name: firewalld
+        enabled: no
+        state: stopped

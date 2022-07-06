@@ -1,2 +1,2 @@
 [pulsarservers]
-149.165.155.91 ansible_connection=ssh ansible_user=wkl29
+149.165.152.49 ansible_connection=ssh ansible_user=wkl29
