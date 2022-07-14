@@ -7,6 +7,7 @@ pulsar_pip_install: true
 pulsar_pycurl_ssl_library: openssl
 pulsar_systemd: true
 pulsar_systemd_runner: webless
+pulsar_systemd_environment: [ DRMAA_LIBRARY_PATH=/usr/local/lib/libdrmaa.so.1 ]
 
 pulsar_create_user: true
 pulsar_user: {name: pulsar, shell: /bin/bash}
@@ -47,6 +48,22 @@ pulsar_yaml_config:
       - type: conda
         auto_init: true
         auto_install: true
+  managers:
+    production:
+      type: queued_drmaa
+      #type: queued_python
+      #num_concurrent_jobs: 3
+      #native_specification: "-P bignodes -R y -pe threads 8"
+    test:
+      type: queued_drmaa
+      #type: queued_python
+      #num_concurrent_jobs: 3
+      #native_specification: "-P bignodes -R y -pe threads 8"
+    _default_:
+      type: queued_drmaa
+      #type: queued_python
+      #num_concurrent_jobs: 3
+      #native_specification: "-P bignodes -R y -pe threads 8"
 
 # Pulsar should use the same job metrics plugins as Galaxy. This will automatically set `job_metrics_config_file` in
 # `pulsar_yaml_config` and create `{{ pulsar_config_dir }}/job_metrics_conf.yml`.
