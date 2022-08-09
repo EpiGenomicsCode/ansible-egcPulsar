@@ -51,7 +51,7 @@ sudo apt install sshpass -y
 Download roles for ansible
 ```
 cd pulsar/
-ansible-galaxy install -p roles -r requirements.yml
+ansible-galaxy install -r requirements.yml
 ```
 
 Deploy ansible playbook
