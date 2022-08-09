@@ -4,10 +4,10 @@
   vars_files:
     - group_vars/secret.yml
   pre_tasks:
-    - name: system update
-      ansible.builtin.dnf:
-        name: '*'
-        state: latest
+#    - name: system update
+#      ansible.builtin.dnf:
+#        name: '*'
+#        state: latest
     - name: Install Pulsar dependencies
       become: yes
       ansible.builtin.dnf:
