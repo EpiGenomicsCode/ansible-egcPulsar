@@ -14,19 +14,44 @@ sudo make
 sudo make install
 ```
 
-## Update Elastic node image
-- Changes to the base image that need to be propagated to the elastic cluster image require re-running the CRI_Jetstream scripts
+## Modify default elastic node image to mount pulsar working directory
+- The default elastic node image does not mount pulsar directory. A modified Git repo must be cloned and installed
+
+1. Git clone the Elastic Cluster repo with Pulsar-specific changes
+```
+sudo su rocky
+cd ~/
+mkdir -p ORIG
+mv CRI_Jetstream_Cluster/ ORIG/
+git clone -b rocky-linux-pulsar https://github.com/WilliamKMLai/CRI_Jetstream_Cluster.git
+```
+
+2. Update the base image that will be propagated to elastic cluster images
+- This requires re-running the CRI_Jetstream scripts
 
 ```
-sudo su - rocky
-cd CRI_Jetstream_Cluster/
 # Destroy the old image
 ./cluster_destroy_local.sh
 # Turn off pulsar so it doesn’t compete with the head node
 sudo systemctl disable pulsar
 # Create the new image
 ./cluster_create_local.sh
+# Turn pulsar back on
+sudo systemctl enable pulsar
 ```
+
+3. Update **/etc/exports** on head node to contain **/mnt/pulsar**, copy IP and permissions from previous entries
+
+Example:
+```
+/home 10.0.62.157/24(rw,no_root_squash)
+/export 10.0.62.157/24(rw,no_root_squash)
+/opt/ohpc/pub 10.0.62.157/24(rw,no_root_squash)
+# Add this here with proper internal IP address
+/mnt/pulsar 10.0.62.157/24(rw,no_root_squash)
+```
+
+4. Restart the Pulsar VM headnode so the NFS server properly serves the /mnt/pulsar directory
 
 ## Debugging elastic node errors
 
