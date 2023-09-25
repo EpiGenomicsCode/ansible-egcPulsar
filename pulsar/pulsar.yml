@@ -30,7 +30,7 @@
       ansible.posix.selinux:
         state: disabled
   roles:
-    - galaxyproject.cvmfs
+    #- galaxyproject.cvmfs
     - galaxyproject.pulsar
   post_tasks:
     - name: Disable firewalld service
