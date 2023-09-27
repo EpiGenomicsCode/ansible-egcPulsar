@@ -32,9 +32,9 @@
   roles:
     #- galaxyproject.cvmfs
     - galaxyproject.pulsar
-  post_tasks:
-    - name: Disable firewalld service
-      ansible.builtin.systemd:
-        name: firewalld
-        enabled: no
-        state: stopped
+#  post_tasks:
+#    - name: Disable firewalld service
+#      ansible.builtin.systemd:
+#        name: firewalld
+#        enabled: no
+#        state: stopped
