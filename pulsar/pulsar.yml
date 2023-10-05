@@ -31,6 +31,7 @@
         state: disabled
   roles:
     #- galaxyproject.cvmfs
+    - galaxyproject.cvmfsexec
     - galaxyproject.pulsar
 #  post_tasks:
 #    - name: Disable firewalld service

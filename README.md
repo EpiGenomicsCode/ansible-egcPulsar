@@ -3,11 +3,15 @@
 ## Tested on RHEL8
 ## Need ansible installed
 > sudo yum -y install ansible
+## Need apptainer installed
+> sudo yum -y apptainer
 
 ## Install requirements for playbook
 > cd /storage/group/cfp102/default/ansible-egcPulsar/pulsar
 >
 > ansible-galaxy install -p roles -r requirements.yml
+>
+> ansible-galaxy role install galaxyproject.cvmfsexec
 
 ## Add .vault-password.txt
 > cp .vault-password.txt /storage/group/cfp102/default/ansible-egcPulsar/pulsar
