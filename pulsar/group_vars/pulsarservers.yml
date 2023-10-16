@@ -1,6 +1,7 @@
 galaxy_server_hostname: "hyperion.cac.cornell.edu" # Important!!!
 # Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
 
+# Path to install pulsar and all subsequent dependencies
 pulsar_root: /storage/group/bfp2/default/00_pughlab/pulsar
 
 pulsar_pip_install: true
@@ -10,11 +11,8 @@ pulsar_systemd_runner: webless
 pulsar_systemd_environment: [ DRMAA_LIBRARY_PATH=/usr/local/lib/libdrmaa.so.1 ]
 
 pulsar_create_user: false
-pulsar_user: {name: testUser, shell: /bin/bash}
-
-#_scratch_root: "/storage/home/cfp102/scratch/"
-_scratch_root: "/mnt/scratch/"
-_cvmfsexec_cert_path: "/storage/group/bfp2/default/00_pughlab/pulsar/etc/cvmfs/keys"
+# Set userID for service account
+pulsar_user: {name: other_5f6ad95074eb4e, shell: /bin/bash}
 
 pulsar_optional_dependencies:
   - pyOpenSSL
@@ -56,46 +54,21 @@ pulsar_yaml_config:
         auto_install: true
   managers:
     production:
-      type: queued_drmaa
-      #type: queued_python
+      #type: queued_drmaa
+      type: queued_python
       #num_concurrent_jobs: 3
       #native_specification: "-P bignodes -R y -pe threads 8"
     test:
-      type: queued_drmaa
-      #type: queued_python
+      #type: queued_drmaa
+      type: queued_python
       #num_concurrent_jobs: 3
       #native_specification: "-P bignodes -R y -pe threads 8"
     _default_:
-      type: queued_drmaa
-      #type: queued_python
+      #type: queued_drmaa
+      type: queued_python
       #num_concurrent_jobs: 3
       #native_specification: "-P bignodes -R y -pe threads 8"
 
 # Pulsar should use the same job metrics plugins as Galaxy. This will automatically set `job_metrics_config_file` in
 # `pulsar_yaml_config` and create `{{ pulsar_config_dir }}/job_metrics_conf.yml`.
 pulsar_job_metrics_plugins: "{{ galaxy_job_metrics_plugins }}"
-
-cvmfsexec_source: none
-cvmfsexec_url: https://github.com/natefoo/cvmfsexec/archive/refs/heads/untar-no-preserve-times.tar.gz
-
-cvmfsexec_files:
-  - src: files/pulsar/galaxyproject.org.pub
-    dest: "{{ _cvmfsexec_cert_path }}/galaxyproject.org/galaxyproject.org.pub"
-  - src: files/pulsar/data.galaxyproject.org.pub
-    dest: "{{ _cvmfsexec_cert_path }}/galaxyproject.org/data.galaxyproject.org.pub"
-  - content: |
-      CVMFS_SERVER_URL='http://cvmfs1-iu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-psu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-tacc0.galaxyproject.org/cvmfs/@fqrn@'
-      CVMFS_KEYS_DIR="{{ _cvmfsexec_cert_path }}/galaxyproject.org"
-    dest: "{{ _cvmfsexec_cert_path }}/domain.d/galaxyproject.org.conf"
-
-cvmfsexec_local_options:
-  - key: CVMFS_ALIEN_CACHE
-    value: "{{ _scratch_root }}/cvmfs-cache"
-  - key: CVMFS_QUOTA_LIMIT
-    value: "-1"
-  - key: CVMFS_SHARED_CACHE
-    value: "no"
-  - key: CVMFS_CLAIM_OWNERSHIP
-    value: "yes"
-  - key: CVMFS_HTTP_PROXY
-    value: DIRECT
