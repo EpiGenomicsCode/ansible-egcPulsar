@@ -4,10 +4,6 @@
   vars_files:
     - group_vars/secret.yml
   pre_tasks:
-#    - name: system update
-#      ansible.builtin.dnf:
-#        name: '*'
-#        state: latest
     - name: Install Pulsar dependencies
       become: yes
       ansible.builtin.dnf:
@@ -30,11 +26,10 @@
       ansible.posix.selinux:
         state: disabled
   roles:
-    #- galaxyproject.cvmfs
+    #- galaxyproject.repos
+    #- galaxyproject.slurm
     - galaxyproject.pulsar
 #  post_tasks:
-#    - name: Disable firewalld service
-#      ansible.builtin.systemd:
-#        name: firewalld
-#        enabled: no
-#        state: stopped
+#    - name: Install slurm-drmaa
+#      package:
+#        name: slurm-drmaa1

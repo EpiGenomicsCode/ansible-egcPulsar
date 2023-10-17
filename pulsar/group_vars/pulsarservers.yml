@@ -72,3 +72,13 @@ pulsar_yaml_config:
 # Pulsar should use the same job metrics plugins as Galaxy. This will automatically set `job_metrics_config_file` in
 # `pulsar_yaml_config` and create `{{ pulsar_config_dir }}/job_metrics_conf.yml`.
 pulsar_job_metrics_plugins: "{{ galaxy_job_metrics_plugins }}"
+
+# Slurm
+slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
+slurm_nodes:
+- name: localhost # Name of our host
+  CPUs: 2         # Here you would need to figure out how many cores your machine has. For this training we will use 2 but in real life, look at `htop` or similar.
+slurm_config:
+  SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
+  SelectType: select/cons_res
+  SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
