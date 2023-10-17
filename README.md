@@ -2,8 +2,7 @@
 
 This playbooks is tested and working on JetStream2 and ROAR Collab.
 
-
-## Requirements
+### Requirements
 - RHEL8
 - Port 5671 open
 
@@ -16,11 +15,18 @@ This playbook relies on an ansible-vault to store the keys required to communica
 ```
 cd /storage/group/cfp102/default/
 git clone -b roarcollab https://github.com/EpiGenomicsCode/ansible-egcPulsar.git
+# Add .vault-password.txt
+> cp .vault-password.txt ansible-egcPulsar/pulsar
 cd ansible-egcPulsar/pulsar
 # Install ansible requirements
 ansible-galaxy install -p roles -r requirements.yml
-# Add .vault-password.txt
-> cp .vault-password.txt /storage/group/cfp102/default/ansible-egcPulsar/pulsar
+```
+
+### Development notes
+- This playbook assumes a ROAR Collab service account already exists on the system. If running this playbook for development purposes, this user will need to be added to the system before running the playbooks
+
+```
+sudo adduser other_5f6ad95074eb4e
 ```
 
 ### Add slurm-drmaa compatibility
@@ -36,18 +42,18 @@ make
 sudo make install
 ```
 
-### Add Slurm compatibility
-- For systems without a pre-existing slurm install (e.g., JS2)
-- Uncomment:
+### Run playbook
 ```
-    #- galaxyproject.repos
-    #- galaxyproject.slurm
-    ...
-    #  post_tasks:
-    #    - name: Install slurm-drmaa
-    #      package:
-    #        name: slurm-drmaa1
+sudo ansible-playbook pulsar.yml
 ```
 
-## Run playbook
-sudo ansible-playbook pulsar.yml
+## Add genome-builds
+- ROAR Collab does not support CVMFS for all nodes and EGC customers often require additional rare genome builds outside CVMFS support
+- Mirroring the genome build structure from the host Galaxy instance on the Pulsar remote server allows for 'local' genome build alignment through a Pulsar server
+- **Note** The current implementation is VERY brittle and will not scale well across multiple Pulsar nodes
+
+```
+cd /storage/group/bfp2/default/00_pughlab/
+wget <URL HERE>
+tar xzvf <GENOME FOLDER>
+```
