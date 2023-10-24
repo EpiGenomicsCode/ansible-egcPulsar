@@ -2,31 +2,34 @@
 
 This playbooks is tested and working on JetStream2 and ROAR Collab.
 
+<details>
+<summary>Development notes</summary>
+- This playbook assumes a ROAR Collab service account already exists on the system. If running this playbook for development purposes, this user will need to be added to the system before running the playbooks
+
+```
+sudo adduser other_5f6ad95074eb4e
+```
+</details>
+
 ### Requirements
 - RHEL8
 - Port 5671 open
 
 ### Install dependencies
-> sudo yum -y install ansible git
+```
+sudo yum -y install ansible git
+```
 
 ### Prepare requirements for playbook
 This playbook relies on an ansible-vault to store the keys required to communicate between Pulsar and Galaxy. This file is '.vault-password.txt' and should added to the playbook after cloning.
 
+- sudo as service account 'other_5f6ad95074eb4e'
+
 ```
-cd /storage/group/cfp102/default/
+cd /storage/home/other_5f6ad95074eb4e/
 git clone -b roarcollab https://github.com/EpiGenomicsCode/ansible-egcPulsar.git
 # Add .vault-password.txt
-> cp .vault-password.txt ansible-egcPulsar/pulsar
-cd ansible-egcPulsar/pulsar
-# Install ansible requirements
-ansible-galaxy install -p roles -r requirements.yml
-```
-
-### Development notes
-- This playbook assumes a ROAR Collab service account already exists on the system. If running this playbook for development purposes, this user will need to be added to the system before running the playbooks
-
-```
-sudo adduser other_5f6ad95074eb4e
+cp /storage/home/other_5f6ad95074eb4e/.vault-password.txt ansible-egcPulsar/pulsar
 ```
 
 ### Add slurm-drmaa compatibility

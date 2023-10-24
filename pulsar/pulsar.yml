@@ -22,14 +22,8 @@
       ansible.builtin.alternatives:
         name: python
         path: /usr/bin/python3
-    - name: Disable SELinux.
-      ansible.posix.selinux:
-        state: disabled
+#    - name: Disable SELinux.
+#      ansible.posix.selinux:
+#        state: disabled
   roles:
-    #- galaxyproject.repos
-    #- galaxyproject.slurm
     - galaxyproject.pulsar
-#  post_tasks:
-#    - name: Install slurm-drmaa
-#      package:
-#        name: slurm-drmaa1
