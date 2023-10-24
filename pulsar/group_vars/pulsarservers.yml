@@ -33,10 +33,10 @@ pulsar_yaml_config:
   persistence_directory: "{{ pulsar_persistence_dir }}"
   tool_dependency_dir: "{{ pulsar_dependencies_dir }}"
   # The following are the settings for the pulsar server to contact the message queue with related timeouts etc.
-  # JS2 destination
-  message_queue_url: "pyamqp://galaxy_iu:{{ rabbitmq_users_password.iupulsar }}@{{ galaxy_server_hostname }}:5671//pulsar/galaxy_iu?ssl=1"
+  # # JS2 destination
+  # message_queue_url: "pyamqp://galaxy_iu:{{ rabbitmq_users_password.iupulsar }}@{{ galaxy_server_hostname }}:5671//pulsar/galaxy_iu?ssl=1"
   # PSU destination
-  #message_queue_url: "pyamqp://galaxy_psu:{{ rabbitmq_users_password.psupulsar }}@{{ galaxy_server_hostname }}:5671//pulsar/galaxy_psu?ssl=1"
+  message_queue_url: "pyamqp://galaxy_psu:{{ rabbitmq_users_password.psupulsar }}@{{ galaxy_server_hostname }}:5671//pulsar/galaxy_psu?ssl=1"
 
   min_polling_interval: 0.5
   amqp_publish_retry: True
@@ -58,16 +58,19 @@ pulsar_yaml_config:
       type: queued_python
       #num_concurrent_jobs: 3
       #native_specification: "-P bignodes -R y -pe threads 8"
+      #native_specification: "--account=open --time=8:00:00 --nodes=1 --ntasks=4 --mem=8GB"
     test:
       #type: queued_drmaa
       type: queued_python
       #num_concurrent_jobs: 3
       #native_specification: "-P bignodes -R y -pe threads 8"
+      #native_specification: "--account=open --time=8:00:00 --nodes=1 --ntasks=4 --mem=8GB"
     _default_:
       #type: queued_drmaa
       type: queued_python
       #num_concurrent_jobs: 3
       #native_specification: "-P bignodes -R y -pe threads 8"
+      #native_specification: "--account=open --time=8:00:00 --nodes=1 --ntasks=4 --mem=8GB"
 
 # Pulsar should use the same job metrics plugins as Galaxy. This will automatically set `job_metrics_config_file` in
 # `pulsar_yaml_config` and create `{{ pulsar_config_dir }}/job_metrics_conf.yml`.
