@@ -21,9 +21,10 @@ sudo yum -y install ansible git
 ```
 
 ### Prepare requirements for playbook
-This playbook relies on an ansible-vault to store the keys required to communicate between Pulsar and Galaxy. This file is '.vault-password.txt' and should added to the playbook after cloning.
+This playbook relies on an ansible-vault to store the keys required to communicate between Pulsar and Galaxy. This file is **.vault-password.txt** and should added to the playbook after cloning.
 
 - sudo as service account 'other_5f6ad95074eb4e'
+- We are assuming the service account already has the vault-password in its home directory
 
 ```
 cd /storage/home/other_5f6ad95074eb4e/
@@ -39,7 +40,7 @@ wget https://github.com/natefoo/slurm-drmaa/releases/download/1.1.4/slurm-drmaa-
 tar xzvf slurm-drmaa-1.1.4.tar.gz
 cd slurm-drmaa-1.1.4/
 export LD_LIBRARY_PATH=/storage/sys/slurm/lib
-./configure  --with-slurm-inc=/storage/sys/slurm/include --with-slurm-lib=/storage/sys/slurm/lib --prefix=/mnt/pulsar/slurm-drmaa
+./configure  --with-slurm-inc=/storage/sys/slurm/include --with-slurm-lib=/storage/sys/slurm/lib --prefix=/storage/group/bfp2/default/00_pughlab/pulsar/slurm-drmaa
 make
 # TODO Check to see if sudo is necessary
 sudo make install

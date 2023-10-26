@@ -8,7 +8,7 @@ pulsar_pip_install: true
 pulsar_pycurl_ssl_library: openssl
 pulsar_systemd: true
 pulsar_systemd_runner: webless
-pulsar_systemd_environment: [ DRMAA_LIBRARY_PATH=/usr/local/lib/libdrmaa.so.1 ]
+pulsar_systemd_environment: [ DRMAA_LIBRARY_PATH=/storage/group/bfp2/default/00_pughlab/pulsar/slurm-drmaa/lib/libdrmaa.so.1 ]
 
 pulsar_create_user: false
 # Set userID for service account
