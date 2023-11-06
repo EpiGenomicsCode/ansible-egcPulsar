@@ -1,4 +1,3 @@
 [pulsarservers]
-#149.165.155.7 ansible_connection=ssh ansible_user=wkl29
-#149.165.154.196 ansible_connection=ssh ansible_user=wkl29
-localhost ansible_connection=local ansible_user=cfp102
+149.165.153.51 ansible_connection=ssh ansible_user=exouser
+#localhost ansible_connection=local ansible_user=cfp102

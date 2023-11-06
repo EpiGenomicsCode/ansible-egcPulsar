@@ -5,9 +5,13 @@ This playbooks is tested and working on JetStream2 and ROAR Collab.
 <details>
 <summary>Development notes</summary>
 - This playbook assumes a ROAR Collab service account already exists on the system. If running this playbook for development purposes, this user will need to be added to the system before running the playbooks
+- This playbook assumes the RC service account belongs to the bfp2_collab group. 
+
 
 ```
 sudo adduser other_5f6ad95074eb4e
+sudo groupadd bfp2_collab
+sudo usermod -a -G bfp2_collab other_5f6ad95074eb4e
 ```
 </details>
 
