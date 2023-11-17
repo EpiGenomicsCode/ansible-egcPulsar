@@ -2,7 +2,24 @@
 ---
 - Modifications needed for a JetStream2 VM to communicate with Galaxy
 
-## Configure DRMAA
+## Configure munge - Rocky 8
+
+```
+git clone https://github.com/dun/munge.git
+cd munge
+./bootstrap
+./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+make
+make check
+sudo make install
+```
+
+- Make mungekey
+```
+sudo -u munge mungekey --verbose
+```
+
+## Configure DRMAA - Ubuntu 22.04
 - When using the SLURM Elastic cluster, SLURM DRMAA needs to be manually compiled and installed prior to running the Pulsar playbook
 
 ```

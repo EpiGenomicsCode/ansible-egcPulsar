@@ -1,2 +1,3 @@
 pulsar/.vault-password.txt
 .DS_Store
+pulsar/roles/galaxyproject.slurm

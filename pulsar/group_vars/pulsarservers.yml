@@ -56,23 +56,25 @@ pulsar_yaml_config:
         auto_install: true
   managers:
     production:
+      type: queued_drmaa
+      #type: queued_python
+      #native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task=4 --mem=8GB"
+    high_core:
       #type: queued_drmaa
       type: queued_python
-      #num_concurrent_jobs: 3
-      #native_specification: "-P bignodes -R y -pe threads 8"
-      #native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task=4 --mem=8GB"
-    test:
+      #native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task=12 --mem=72GB"
+    med_core:
       #type: queued_drmaa
       type: queued_python
-      #num_concurrent_jobs: 3
-      #native_specification: "-P bignodes -R y -pe threads 8"
-      #native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task=4 --mem=8GB"
+      #native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task=4 --mem=28GB"
+    low_core:
+      #type: queued_drmaa
+      type: queued_python
+      #native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task=1 --mem=8GB"
     _default_:
       #type: queued_drmaa
       type: queued_python
-      #num_concurrent_jobs: 3
-      #native_specification: "-P bignodes -R y -pe threads 8"
-      #native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task=4 --mem=8GB"
+      #native_specification: "--account=open --time=8:00:00 --nodes=1 --cpus-per-task=4 --mem=28GB"
 
 # Pulsar should use the same job metrics plugins as Galaxy. This will automatically set `job_metrics_config_file` in
 # `pulsar_yaml_config` and create `{{ pulsar_config_dir }}/job_metrics_conf.yml`.

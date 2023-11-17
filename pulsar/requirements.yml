@@ -1,3 +1,5 @@
 # Pulsar
 - src: galaxyproject.pulsar
   version: 1.0.10
+- src: galaxyproject.slurm
+  version: 1.0.2

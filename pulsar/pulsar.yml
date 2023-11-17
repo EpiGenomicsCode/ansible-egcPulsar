@@ -27,3 +27,4 @@
 #        state: disabled
   roles:
     - galaxyproject.pulsar
+    - galaxyproject.slurm
