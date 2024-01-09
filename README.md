@@ -5,7 +5,7 @@ This playbooks is tested and working on JetStream2 and ROAR Collab.
 <details>
 <summary>Development notes</summary>
 - This playbook assumes a ROAR Collab service account already exists on the system. If running this playbook for development purposes, this user will need to be added to the system before running the playbooks
-- This playbook assumes the RC service account belongs to the bfp2_collab group. 
+- This playbook assumes the RC service account belongs to the bfp2_collab group.
 
 
 ```
@@ -39,6 +39,7 @@ cp /storage/home/other_5f6ad95074eb4e/.vault-password.txt ansible-egcPulsar/puls
 
 ### Add slurm-drmaa compatibility
 - Required for ROAR Collab
+- Only needs to be run once
 ```
 wget https://github.com/natefoo/slurm-drmaa/releases/download/1.1.4/slurm-drmaa-1.1.4.tar.gz
 tar xzvf slurm-drmaa-1.1.4.tar.gz
@@ -51,8 +52,10 @@ sudo make install
 ```
 
 ### Run playbook
+- Must be run as an account with sudo priv
+- Working ansible playbook is in
 ```
-sudo ansible-playbook pulsar.yml
+sudo ansible-playbook /storage/home/other_5f6ad95074eb4e/ansible-egcPulsar/pulsar/pulsar.yml
 ```
 
 ## Add genome-builds
